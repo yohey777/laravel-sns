@@ -14,4 +14,7 @@
 Route::get('/', function () {
   return view('welcome');
 });
+
+
+Auth::routes(); //-- この行を追加
 Route::get('/', 'ArticleController@index');
