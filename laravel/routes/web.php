@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+
 
 
 Auth::routes(); //-- この行を追加
-Route::get('/', 'ArticleController@index');
+Route::get('/', 'ArticleController@index')->name('articles.index'); //-- この行を編集
+Route::resource('/articles', 'ArticleController')->except(['index', 'show'])->middleware('auth');
+Route::resource('/articles', 'ArticleController')->only(['show']);

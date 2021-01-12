@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'ログイン')
+@section('title', 'パスワード再設定')
 
 @section('content')
 <div class="container">
@@ -9,35 +9,28 @@
       <h1 class="text-center"><a class="text-dark" href="/">memo</a></h1>
       <div class="card mt-3">
         <div class="card-body text-center">
-          <h2 class="h3 card-title text-center mt-2">ログイン</h2>
+          <h2 class="h3 card-title text-center mt-2">パスワード再設定</h2>
 
           @include('error_card_list')
 
+          @if (session('status'))
+          <div class="card-text alert alert-success">
+            {{ session('status') }}
+          </div>
+          @endif
+
           <div class="card-text">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('password.email') }}">
               @csrf
 
               <div class="md-form">
                 <label for="email">メールアドレス</label>
-                <input class="form-control" type="text" id="email" name="email" required value="{{ old('email') }}">
+                <input class="form-control" type="text" id="email" name="email" required>
               </div>
 
-              <div class="md-form">
-                <label for="password">パスワード</label>
-                <input class="form-control" type="password" id="password" name="password" required>
-              </div>
-
-              {{--ここから--}}
-              <input type="hidden" name="remember" id="remember" value="on">
-              {{--ここまで--}}
-
-              <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ログイン</button>
+              <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">メール送信</button>
 
             </form>
-
-            <div class="mt-0">
-              <a href="{{ route('register') }}" class="card-text">ユーザー登録はこちら</a>
-            </div>
 
           </div>
         </div>
